@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151026182157) do
+ActiveRecord::Schema.define(version: 20151027013947) do
 
   create_table "books", force: :cascade do |t|
     t.string   "title"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20151026182157) do
     t.integer  "book_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean  "returned"
   end
 
   add_index "checkouts", ["book_id"], name: "index_checkouts_on_book_id"

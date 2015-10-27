@@ -1,0 +1,37 @@
+<h1>Bookshelf</h1>
+<ul>
+  <% @books.each do |b| %>
+    <li>
+      <strong><%= b.title %></strong> by <%= b.author %>
+        <%= form_tag "/books/#{b.id}", method: :DELETE do %>
+          <button>Remove Book?</button>
+        <% end %>
+      <% if b.currently_out == false %>
+        <%= form_tag "/books/#{b.id}/checkouts", method: :post do %>
+          <button>Checkout</button>
+        <% end %>
+      <% elsif b.currently_out == true %>
+      <!-- This will not work. Need to define currently_out user. -->
+        <%= form_tag "/books/#{b.id}/checkouts/#{current_user.checkouts}", method: :patch do %>
+        <button>Return</button>
+        <% end %>
+      <!--  -->
+      <% else %>
+      <strong>Currently Checked Out</strong>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
+<br>
+<br>
+<%= form_tag "/books", method: :post do %>
+  <label>
+    Title
+    <input type="text" name="title">
+  </label>
+  <label>
+    Author
+    <input type="text" name="author">
+  </label>
+  <button>Add Book</button>
+<% end %>
